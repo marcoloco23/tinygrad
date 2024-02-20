@@ -290,7 +290,7 @@ class Tensor:
   def deepwalk(self) -> List[Tensor]:
     def _deepwalk(node:Tensor, visited:set[Tensor]) -> Iterable[Tensor]:
       visited.add(node)
-      if getattr(node, "_ctx", None):
+      if node._ctx is not None:
         for i in node._ctx.parents:
           if i not in visited: yield from _deepwalk(i, visited)
         yield node
